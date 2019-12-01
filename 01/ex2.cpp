@@ -3,12 +3,12 @@
 
 using namespace std;
 
-int required_fuel(int mass, int start_fuel){
+int required_fuel(int mass){
 	int fuel = mass / 3 - 2;
-	if(fuel < 0){
-		return start_fuel;
+	if(fuel <= 0){
+		return 0;
 	}
-	return required_fuel(fuel, fuel + start_fuel);
+	return fuel + required_fuel(fuel);
 }
 
 int main(int argc, char const *argv[]){
@@ -22,7 +22,7 @@ int main(int argc, char const *argv[]){
 	while(!in_stream.eof()){
 		int module_mass;
 		in_stream >> module_mass;
-		sum += required_fuel(module_mass, 0);
+		sum += required_fuel(module_mass);
 	}
 	cout << sum << endl;
 
